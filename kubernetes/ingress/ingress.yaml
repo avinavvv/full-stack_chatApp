@@ -4,7 +4,7 @@ metadata:
   name: observex-ingress
   namespace: observex
 spec:
-  ingressClassName: traefik
+  ingressClassName: nginx
   rules:
     - host: observex.local
       http:
