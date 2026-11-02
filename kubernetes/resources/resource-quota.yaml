@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: ResourceQuota
+metadata:
+  name: observex-quota
+  namespace: observex
+spec:
+  hard:
+    pods: "20"
+    services: "10"
+    persistentvolumeclaims: "5"
+    requests.storage: 10Gi

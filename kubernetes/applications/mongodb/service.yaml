@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: mongodb
+  namespace: observex
+  labels:
+    app: mongodb
+    environment: dev
+
+spec:
+  clusterIP: None
+
+  selector:
+    app: mongodb
+
+  ports:
+    - name: mongodb
+      port: 27017
+      targetPort: 27017
+      protocol: TCP

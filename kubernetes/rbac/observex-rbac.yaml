@@ -1,0 +1,47 @@
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: observex-reader
+  namespace: observex
+automountServiceAccountToken: false
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: observex-read-role
+  namespace: observex
+rules:
+  - apiGroups: [""]
+    resources:
+      - pods
+      - services
+      - endpoints
+      - configmaps
+      - persistentvolumeclaims
+    verbs:
+      - get
+      - list
+      - watch
+  - apiGroups: ["apps"]
+    resources:
+      - deployments
+      - statefulsets
+      - replicasets
+    verbs:
+      - get
+      - list
+      - watch
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: observex-read-binding
+  namespace: observex
+subjects:
+  - kind: ServiceAccount
+    name: observex-reader
+    namespace: observex
+roleRef:
+  kind: Role
+  name: observex-read-role
+  apiGroup: rbac.authorization.k8s.io

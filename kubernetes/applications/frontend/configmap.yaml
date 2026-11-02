@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: frontend-config
+  namespace: observex
+  labels:
+    app: frontend
+    environment: dev
+data:
+  NODE_ENV: "production"

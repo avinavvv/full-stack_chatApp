@@ -1,0 +1,32 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+resources:
+  - namespaces/observex-namespace.yaml
+
+  - applications/mongodb/pvc.yaml
+  - applications/mongodb/service.yaml
+  - applications/mongodb/statefulset.yaml
+
+  - applications/backend/configmap.yaml
+  - applications/backend/service.yaml
+  - applications/backend/deployment.yaml
+
+  - applications/frontend/configmap.yaml
+  - applications/frontend/service.yaml
+  - applications/frontend/deployment.yaml
+
+  - ingress/ingress.yaml
+
+  - resources/resource-quota.yaml
+  - resources/limit-range.yaml
+  - resources/pod-disruption-budget.yaml
+
+  - autoscaling/frontend-hpa.yaml
+  - autoscaling/backend-hpa.yaml
+
+  - rbac/observex-rbac.yaml
+
+  - network-policies/frontend-policy.yaml
+  - network-policies/backend-policy.yaml
+  - network-policies/mongodb-policy.yaml
