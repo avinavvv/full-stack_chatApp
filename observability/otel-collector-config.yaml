@@ -21,7 +21,7 @@ exporters:
     endpoint: http://observex-tempo.observability.svc.cluster.local:4318
 
   debug:
-    verbosity: basic
+    verbosity: detailed
 
 extensions:
   health_check:
