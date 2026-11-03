@@ -23,7 +23,7 @@ spec:
     spec:
       containers:
         - name: backend
-          image: avinavv/observex-backend:v2
+          image: avinavv/observex-backend:v3
           imagePullPolicy: IfNotPresent
 
           ports:
@@ -35,6 +35,8 @@ spec:
                 name: backend-config
 
           env:
+            - name: OTEL_EXPORTER_OTLP_ENDPOINT
+              value: http://otel-collector.observability.svc.cluster.local:4318
             - name: MONGODB_URI
               valueFrom:
                 secretKeyRef:

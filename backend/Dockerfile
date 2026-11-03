@@ -16,6 +16,7 @@ RUN addgroup -S appgroup && adduser -S appuser -G appgroup
 
 COPY --from=builder --chown=appuser:appgroup /app/node_modules ./node_modules
 COPY --chown=appuser:appgroup package.json ./
+COPY --chown=appuser:appgroup instrumentation.js ./instrumentation.js
 COPY --chown=appuser:appgroup src ./src
 
 ENV NODE_ENV=production
