@@ -23,7 +23,7 @@ spec:
     spec:
       containers:
         - name: backend
-          image: avinavv/observex-backend:v4
+          image: avinavv/observex-backend:v5
           imagePullPolicy: IfNotPresent
 
           ports:
