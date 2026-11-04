@@ -12,6 +12,7 @@ import {
 } from "@opentelemetry/sdk-logs";
 
 import { logs, SeverityNumber } from "@opentelemetry/api";
+import { resourceFromAttributes } from "@opentelemetry/resources";
 import { format } from "node:util";
 
 const collectorEndpoint =
@@ -57,6 +58,9 @@ const sdk = new NodeSDK({
 
 // Logs
 const loggerProvider = new LoggerProvider({
+  resource: resourceFromAttributes({
+    "service.name": "observex-backend",
+  }),
   processors: [
     new BatchLogRecordProcessor({
       exporter: new OTLPLogExporter({
