@@ -7,6 +7,11 @@ receivers:
         endpoint: 0.0.0.0:4318
 
 processors:
+  transform/log_resource:
+    log_statements:
+      - context: log
+        statements:
+          - set(resource.attributes["service.name"], attributes["service.name"]) where attributes["service.name"] != nil
   memory_limiter:
     check_interval: 5s
     limit_mib: 192
@@ -19,7 +24,8 @@ processors:
 exporters:
   otlphttp/tempo:
     endpoint: http://observex-tempo.observability.svc.cluster.local:4318
-
+  otlphttp/loki:
+    endpoint: http://observex-loki.observability.svc.cluster.local:3100/otlp
   debug:
     verbosity: detailed
 
@@ -44,5 +50,5 @@ service:
 
     logs:
       receivers: [otlp]
-      processors: [memory_limiter, batch]
-      exporters: [debug]
+      processors: [memory_limiter, transform/log_resource, batch]
+      exporters: [otlphttp/loki, debug]
